@@ -1,0 +1,46 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Class {
+  id        Int       @id @default(autoincrement())
+  name      String
+  students  Student[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@map("classes")
+}
+
+model Student {
+  id           Int          @id @default(autoincrement())
+  uniqueNumber String
+  name         String
+  classId      Int
+  class        Class        @relation(fields: [classId], references: [id])
+  attendances  Attendance[]
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@unique([uniqueNumber, classId])
+  @@map("students")
+}
+
+model Attendance {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  student   Student  @relation(fields: [studentId], references: [id])
+  date      String // YYYY-MM-DD format
+  status    String // "Present" or "Absent"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([studentId, date])
+  @@map("attendances")
+}

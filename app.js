@@ -1,4 +1,6 @@
+// app.js
 import { Hono } from 'hono';
+import { serve } from '@hono/node-server';
 import { cors } from 'hono/cors';
 import { PrismaClient } from '@prisma/client';
 import { csvParse } from 'd3-dsv';
@@ -277,9 +279,9 @@ app.get('/api/classes/:class_id/absent', async (c) => {
 
 // Start the server
 const port = process.env.PORT || 3000;
-console.log(`Server is running on port ${port}`);
-
-export default {
-    port,
-    fetch: app.fetch
-};
+serve({
+    fetch: app.fetch,
+    port: port
+}, (info) => {
+    console.log(`Server is running on http://localhost:${info.port}`);
+});

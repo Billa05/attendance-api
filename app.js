@@ -1,15 +1,7 @@
-// app.js
 import { Hono } from 'hono';
-import { serveStatic } from 'hono/serve-static';
 import { cors } from 'hono/cors';
-import { Database } from 'sqlite3';
 import { PrismaClient } from '@prisma/client';
 import { csvParse } from 'd3-dsv';
-import { parseFile } from 'fast-csv';
-import { createReadStream } from 'fs';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
 import { format } from 'date-fns';
 
 // Initialize Hono app

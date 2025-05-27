@@ -2,6 +2,13 @@
 
 A Hono-based REST API for tracking class attendance with PostgreSQL database integration.
 
+## Demo
+
+
+https://github.com/user-attachments/assets/88b6ddc2-757b-41e5-91e7-63efa54cba0a
+
+
+
 ## Features
 
 - Create and manage classes
